@@ -1,0 +1,13 @@
+﻿-------------------
+TIMER DUPLICATE BUG
+-------------------
+
+Timer increments +1 for every new game started. So after 3 games the timer goes -3 instead of --.
+
+Probably start new instance of a timer every time a new game is started
+
+-------------------
+ABOUTBOX IMAGE
+-------------------
+
+Set personal image on the AboutBox
