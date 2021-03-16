@@ -1,5 +1,5 @@
 ﻿-------------------
-TIMER DUPLICATE BUG
+TIMER DUPLICATE BUG (FIXED)
 -------------------
 
 Timer increments +1 for every new game started. So after 3 games the timer goes -3 instead of --.
@@ -11,3 +11,11 @@ ABOUTBOX IMAGE
 -------------------
 
 Set personal image on the AboutBox
+
+-------------------
+CLOSE LOGIN WINDOW (FIXED)
+-------------------
+
+Login window stays open after a correct user & pass has been entered
+
+FIXED: added this.close() before new window ShowDialog

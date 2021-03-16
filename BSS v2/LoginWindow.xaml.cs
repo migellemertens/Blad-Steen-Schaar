@@ -32,6 +32,7 @@ namespace BSS_v2
                 if(Equals(TxtSpeler.Text, speler.Value) && (Equals(PwdBoxLogin.Password, speler.Key)))
                 {
                     MainWindow spelScherm = new MainWindow(TxtSpeler.Text);
+                    this.Close();
                     spelScherm.ShowDialog();
                 }
                 else if(Equals(TxtSpeler.Text, speler.Value) && (!Equals(PwdBoxLogin.Password, speler.Key)))

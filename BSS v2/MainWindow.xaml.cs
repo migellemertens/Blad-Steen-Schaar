@@ -23,7 +23,7 @@ namespace BSS_v2
     {
         #region MEMBER VARIABELEN
         private DispatcherTimer tijdTonen = new DispatcherTimer();
-        private DispatcherTimer spelTimer = new DispatcherTimer();
+        private DispatcherTimer spelTimer;
         private Keuze _keuzeSpeler;
         private Keuze _keuzeComputer;
         private Rectangle _rechthoekSpeler;
@@ -35,6 +35,7 @@ namespace BSS_v2
         private bool _spelGestart = false;
         #endregion
 
+        #region WINDOW CONSTRUCTOR
         public MainWindow()
         {
             InitializeComponent();
@@ -51,20 +52,24 @@ namespace BSS_v2
             tijdTonen.Interval = TimeSpan.FromMilliseconds(1000);
             tijdTonen.Tick += timer_tick;
             tijdTonen.Start();
+
+            StartSpelTimer();
         }
+        #endregion
 
         private void timer_tick(object sender, EventArgs e)
         {
             LblToonTijd.Content = DateTime.Now.ToString("d MMMM yyyy HH:mm:ss");
         }
 
-        private void StartTimer()
+        #region SPEL TIJDLIMIET
+        private void StartSpelTimer()
         {
+            spelTimer = new DispatcherTimer();
             _spelSeconden = 10;
             LblResterendeSeconden.Content = _spelSeconden;
             spelTimer.Interval = TimeSpan.FromMilliseconds(1000);
             spelTimer.Tick += spelTimer_tick;
-            spelTimer.Start();
         }
 
         private void UpdateTimer()
@@ -85,6 +90,7 @@ namespace BSS_v2
             }
             LblResterendeSeconden.Content = _spelSeconden;
         }
+        #endregion
 
         #region BUTTON KEUZES
         private void BtnSteen_Click(object sender, RoutedEventArgs e)
@@ -96,7 +102,7 @@ namespace BSS_v2
             if (!_spelGestart)
             {
                 _spelGestart = true;
-                StartTimer();
+                spelTimer.Start();
             }
             else
             {
@@ -113,7 +119,7 @@ namespace BSS_v2
             if (!_spelGestart)
             {
                 _spelGestart = true;
-                StartTimer();
+                spelTimer.Start();
             }
             else
             {
@@ -130,7 +136,7 @@ namespace BSS_v2
             if (!_spelGestart)
             {
                 _spelGestart = true;
-                StartTimer();
+                spelTimer.Start();
             }
             else
             {
@@ -139,6 +145,7 @@ namespace BSS_v2
         }
         #endregion
 
+        #region GAME VERLOOP
         private void GenereerKeuzeComputer()
         {
             Random r = new Random();
@@ -207,6 +214,7 @@ namespace BSS_v2
             _rechthoekSpeler.Stroke = user;
             _rechthoekComputer.Stroke = computer;
         }
+        #endregion
 
         #region TOON KEUZE AFBEELDINGEN
         private void ToonAfbeeldingen()
@@ -247,6 +255,7 @@ namespace BSS_v2
             _rechthoekComputer.Stroke = new SolidColorBrush(Colors.Gray);
             _scoreSpeler = 0;
             _scoreComputer = 0;
+            _spelSeconden = 10;
             LblSpelerNaam.Content = _spelerNaam;
             LblSpelerScore.Content = _scoreSpeler;
             LblComputerScore.Content = _scoreComputer;
