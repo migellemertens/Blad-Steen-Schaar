@@ -1,0 +1,11 @@
+﻿1. REGISTRATIE
+
+De REGISTRATIE is volledig functioneel. Vandaar dat ik geen effect op het stackpanel heb geplaatst. Bij v1, v2 en v3 heb ik gebruik gemaakt
+van een statische Wachtwoorden.cs klasse. Om het echter iets werkbaarder te maken met de registratie ben ik bij v4 overgeschakeld naar een
+tekstbestand om de gebruikers bij te houden. Na de registratie wordt de nieuwe speler meteen beschikbaar in de combobox en kan ermee
+ingelogged worden.
+
+2. RUNNEN VAN DE APPLICATIE
+
+Deze versie kan best gerunned worden direct vanuit Visual Studio of vanuit de bin/Debug folder. Anders zijn er problemen met de tekstbestanden
+waar ik niet meer de tijd voor had om ze op te lossen.

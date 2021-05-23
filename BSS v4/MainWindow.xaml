@@ -1,0 +1,280 @@
+﻿<Window x:Class="BSS_v4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BSS_v4"
+        mc:Ignorable="d"
+        Title="Blad Steen Schaar" Height="710" Width="1300"
+        MinHeight="510" MinWidth="900"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="#181735"
+        FontFamily="fonts/#Dosis" 
+        Closing="Window_Closing">
+
+    <Window.Resources>
+
+        <!--#region STYLE CLOSE BUTTON-->
+        <Style x:Key="closeButton" TargetType="Button">
+            <Setter Property="TextElement.FontFamily" Value="fonts/#Dosis"/>
+            <Setter Property="Background" Value="#c80e0e"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#900909"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+        <!--#region STYLE MIN - MAX BUTTON -->
+        <Style x:Key="windowButton" TargetType="Button">
+            <Setter Property="TextElement.FontFamily" Value="fonts/#Dosis"/>
+            <Setter Property="Background" Value="#030322"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#282843"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+
+        <!--#region STYLE MENU BASIS -->
+        <!--Menu background and properties-->
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#0F0F2D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextElement.FontFamily" Value="fonts/#Dosis"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+        <!--#endregion-->
+        <!--#region STYLE HEADER ITEMS EN HOVER OVER SUBITEMS -->
+        <!--Top menu item-->
+        <ControlTemplate x:Key="topMenuItem" TargetType="MenuItem">
+            <StackPanel TextBlock.FontSize="18" Height="40">
+                <Label Content="{TemplateBinding Header}" Margin="5,5,30,0" Foreground="White"/>
+
+                <!--Sub menu item-->
+                <Popup IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False">
+                    <Border BorderThickness="1" Background="#0F0F2D" BorderBrush="#0F0F2D">
+                        <StackPanel IsItemsHost="True"/>
+                    </Border>
+                </Popup>
+                <!--Top menu mouse over layout -->
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0c87e5"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+        </ControlTemplate>
+        <!--#endregion-->
+        <!--#region STYLE SUB MENU ITEMS-->
+        <ControlTemplate x:Key="subMenuItem" TargetType="MenuItem">
+            <!--Set submenuitem size, margin and color-->
+            <DockPanel TextBlock.FontSize="18" x:Name="panel">
+                <Label Content="{TemplateBinding Header}" Foreground="White" Margin="0,5,5,5"/>
+
+                <Popup IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" Placement="Right">
+                    <Border BorderThickness="1" Background="#0c87e5" BorderBrush="#0c87e5">
+                        <StackPanel IsItemsHost="True"/>
+                    </Border>
+                </Popup>
+            </DockPanel>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" TargetName="panel" Value="#0c87e5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <!--#endregion-->
+
+        <!--#region VERWIJDER BUTTON HIGHLIGHT-->
+        <Style x:Key="removeHighlight" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+    </Window.Resources>
+
+    <Grid>
+        <!--MAIN GRID DEFINITIES-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="696*"/>
+            <ColumnDefinition Width="345"/>
+        </Grid.ColumnDefinitions>
+
+        <!--#region TITEL BAR-->
+        <Grid Background="#030322" Grid.ColumnSpan="5" MouseDown="Grid_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{StaticResource closeButton}" x:Name="BtnSluiten" Content="X"  FontSize="12" FontWeight="Medium" Grid.Column="13" Click="BtnSluiten_Click" />
+            <Button Style="{StaticResource windowButton}" x:Name="BtnMaximize" Content="&#9633;" FontSize="20" FontWeight="Medium" Grid.Column="12" Click="BtnMaximize_Click"/>
+            <Button Style="{StaticResource windowButton}" x:Name="BtnMinimize" Content="-" FontSize="14" FontWeight="Medium" Grid.Column="11" Click="BtnMinimize_Click"/>
+            <Label Content="Blad-Steen-Schaar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White"/>
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region MENU-->
+        <Grid Grid.ColumnSpan="5" Grid.Row="1">
+            <Menu>
+                <MenuItem Template="{StaticResource topMenuItem}" Header="Bestand">
+                    <MenuItem Template="{StaticResource subMenuItem}" Header="Sluiten" Click="MnuSluiten_Click"/>
+                </MenuItem>
+                <MenuItem Template="{StaticResource topMenuItem}" Header="Help">
+                    <MenuItem Template="{StaticResource subMenuItem}" Header="Regels" Click="MnuRegels_Click"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region STACKPANEL MET KEUZEBUTTONS-->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="1"  Margin="10">
+            <Button x:Name="btnBlad" Style="{StaticResource removeHighlight}" Background="Transparent" BorderBrush="Transparent" Margin="0,0,0,20" MouseEnter="btnBlad_MouseEnter" Click="BtnBlad_Click" MouseLeave="btnBlad_MouseLeave">
+                <Image x:Name="imgButtonBlad" Source="img/blad.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button x:Name="btnSteen" Style="{StaticResource removeHighlight}" Background="Transparent" BorderBrush="Transparent" Margin="0,0,0,20" MouseEnter="btnSteen_MouseEnter" Click="BtnSteen_Click" MouseLeave="btnSteen_MouseLeave">
+                <Image x:Name="imgButtonSteen" Source="img/steen.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button x:Name="btnSchaar" Style="{StaticResource removeHighlight}" Background="Transparent" BorderBrush="Transparent" MouseEnter="btnSchaar_MouseEnter" Click="BtnSchaar_Click" MouseLeave="btnSchaar_MouseLeave">
+                <Image x:Name="imgButtonSchaar" Source="img/schaar.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region SPEELVELD GRID-->
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="48*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="85*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Viewbox>
+                    <Label x:Name="LblMelding" Content="" Foreground="White" FontSize="50"></Label>
+                </Viewbox>
+            </StackPanel>
+
+            <Border x:Name="BdrSpeler" Grid.Column="0" Grid.Row="1">
+                <Image x:Name="ImgKeuzeSpeler" Margin="30"/>
+            </Border>
+            <Border Name="BdrComputer" Grid.Column="2" Grid.Row="1">
+                <Image x:Name="ImgKeuzeComputer" Margin="30"/>
+            </Border>
+        </Grid>
+        <!--#endregion-->
+        
+        <!--#region RESULTATEN-->
+        <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Margin="15">
+            <ListBox x:Name="LstHistoriek" Foreground="White" Background="Transparent" FontSize="16" BorderThickness="0" FontFamily="Courier New" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+        
+
+        <!--#region RESTERENDE TIJD EN SCORES-->
+        <Viewbox Grid.Row="3" Grid.Column="0">
+            <Label Name="LblResterendeSeconden" Content="10" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="100"/>
+        </Viewbox>
+
+        <Grid Grid.Row="3" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0">
+                <Label Name="LblSpelerScore" Content="10" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="100"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1">
+                <Label Name="LblComputerScore" Content="10" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="100"/>
+            </Viewbox>
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region STATUSBAR-->
+        <StatusBar Grid.Row="4" Grid.ColumnSpan="5" Background="#0F0F2D" Foreground="White" HorizontalAlignment="Stretch">
+            <StatusBarItem Content="Ready" Foreground="White" Margin="10,0,5,0"/>
+            <StatusBarItem Margin="5,0,5,0">
+                <Image Source="img/logo.png" />
+            </StatusBarItem>
+            <StatusBarItem  Margin="5,0,0,0">
+                <Label Name="LblSpelerNaam" Content="" Foreground="White"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right" >
+                <Label Name="LblToonTijd" Content="" Foreground="White"/>
+            </StatusBarItem>
+        </StatusBar>
+        <!--#endregion-->
+
+    </Grid>
+</Window>

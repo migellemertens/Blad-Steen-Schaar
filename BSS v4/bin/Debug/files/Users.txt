@@ -1,0 +1,10 @@
+﻿MiMe,Migelle Mertens
+PaBr,Patricia Briers
+PaDo,Paul Dox
+ToSt,Tony Stark
+StSt,Steven Strange
+PePa,Peter Parker
+NiFu,Nick Fury
+WaMa,Wanda Maximoff
+ClBa,Clint Barton
+ThOd,Thor Odinson

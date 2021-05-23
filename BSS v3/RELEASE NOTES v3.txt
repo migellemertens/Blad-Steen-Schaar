@@ -1,0 +1,62 @@
+﻿--------------------
+BLAD-STEEN-SCHAAR v3
+--------------------
+Development: Migelle Mertens
+Design: Migelle Mertens
+
+--------------------
+INFO 
+--------------------
+WPF Applicatie die het klassieke spel "Blad-Steen-Schaar" nabootst doormiddel van een grafische interface.
+
+--------------------
+RELEASE NOTES
+--------------------
+1.	v3 van het spel bevat alle functionaliteit van v2
+2.	Uitleg score calculatie uit RELEASE NOTES v1 onderaan toegevoegd
+3.	Ontwerp van het spel is volledig veranderd inclusief schaling
+4.	Extra afbeeldingen toegevoegd voor gelijk spel
+5.	Sommige methodes zijn aangepast en compacter geschreven
+
+--------------------
+1. SCORE CALCULATIE
+--------------------
+
+1.	De keuze van de gebruiker krijgt een int-waarde afhankelijk van de enum-klasse "Keuze".
+2.	Voor de waarde van _keuzeComputer wordt een % 3 berekend
+3.	De int-waarden van _keuzeSpeler en _keuzeComputer worden vergeleken
+4.	In onderstaande punten wordt de calculatie voor GELIJK SPEL - WINST - VERLIES beschreven
+
+--------------------
+1.1 GELIJK SPEL
+--------------------
+Voor het gelijk spel wordt voor de waarde van _keuzeSpeler % 3 berekend om deze te vergelijken
+
+Stap 1:
+_keuzeSpeler = Steen = int waarde van 1
+_keuzeComputer = Steen = int waarde van 1
+
+Stap2:
+_keuzeSpeler = 1 % 3 = 1
+_keuzeComputer = 1 % 3 = 1
+
+_keuzeSpeler & _keuzeComputer hebben dezelfde waarde = gelijk spel
+
+--------------------
+1.2 WINST
+--------------------
+Om na te gaan of de speler wint wordt gekeken of _keuzeSpeler en _keuzeComputer dezelfde waarde hebben
+na dat de waarde van _keuzeComputer + 1 gedaan wordt.
+
+_keuzeSpeler = Blad = int waarde van 2
+_keuzeComputer = Steen = int waarde van 1
+
+_keuzeSpeler = 2
+_keuzeComputer = 1 + 1 = 2
+
+_keuzeSpeler & _keuze computer hebben dezelfde waarde bij +1 _keuzeComputer = WINST voor de speler
+
+--------------------
+1.3 VERLIES
+--------------------
+Indien condities 1.1 & 1.2 false zijn VERLIEST de speler
